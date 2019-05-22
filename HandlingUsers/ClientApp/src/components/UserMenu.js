@@ -1,9 +1,9 @@
 import React from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import './NavMenu.css';
+import './UserMenu.css';
 
-export default class NavMenu extends React.Component {
+export default class UserMenu extends React.Component {
   constructor (props) {
     super(props);
 

@@ -1,0 +1,20 @@
+﻿
+
+#sidebar {
+    background-color: #fff;
+    padding: 1rem;
+    height: 200%;
+    position: relative;
+}
+
+#sidebar-list {
+    padding-right: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+
