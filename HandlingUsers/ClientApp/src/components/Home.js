@@ -8,15 +8,21 @@ import { actionCreators } from '../store/UsersData';
 import UserMenu from './UserMenu';
 import './Home.css';
 import './UserEnabling.css';
-import { Avatar } from 'react-native-elements';
+import Avatar from 'react-avatar-edit';
 
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = { users: this.props.users };
+        this.state = {
+            users: this.props.users,
+            preview: null,
+            src: this.props.src
+        };
 
         this.filterList = this.filterList.bind(this);
+        this.onCrop = this.onCrop.bind(this)
+        this.onClose = this.onClose.bind(this)
     }
 
     componentDidMount() {
@@ -39,6 +45,14 @@ class Home extends Component {
             return user.name.toLowerCase().search(text.toLowerCase()) !== -1;
         });
         this.setState({ users: filteredList });
+    }
+
+    onClose() {
+        this.setState({ preview: null })
+    }
+
+    onCrop(preview) {
+        this.setState({ preview })
     }
 
     render() {
@@ -70,15 +84,14 @@ class Home extends Component {
                             <div className="row">
                                 <div className="col-sm-4">
                                     <Avatar
-                                        size="large"
-                                        title="LW"
-                                        onPress={() => console.log("Works!")}
-                                        activeOpacity={0.7}
-                                        source={{
-                                            uri:
-                                                'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-                                        }}
+                                        width={200}
+                                        height={295}
+                                        onCrop={this.onCrop}
+                                        onClose={this.onClose}
+                                        src={this.state.src}
+                                        label={"User image"}
                                     />
+                                    <img src={this.state.preview} alt="Preview" />
                                 </div>
                                 <div className="col-sm-8">
                                     <TabPanel>
@@ -241,7 +254,7 @@ class UserEnabling extends React.Component {
                 <input ref="switch" checked={this.state.isChecked} onChange={this._handleChange} className="switch" type="checkbox" />
                 <div>
                     <div>
-                        
+
                     </div>
                 </div>
             </label>
