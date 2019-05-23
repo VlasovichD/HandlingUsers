@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import "react-tabs/style/react-tabs.css";
 import { Link } from 'react-router-dom';
 import { actionCreators } from '../store/UsersData';
 import UserMenu from './UserMenu';
 import './Home.css';
+import './UserEnabling.css';
+import { Avatar } from 'react-native-elements';
+
 
 class Home extends Component {
     constructor(props) {
@@ -56,23 +61,41 @@ class Home extends Component {
                         </div>
                     </div>
                     <div className="col-sm-9">
-                        <nav>
-                            <div className="nav justify-content-center bg-secondary" id="nav-tab" role="tablist">
-                                <a className="nav-item nav-link text-white active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Profile</a>
-                                <a className="nav-item nav-link text-white" id="nav-role-tab" data-toggle="tab" href="#nav-role" role="tab" aria-controls="nav-role" aria-selected="false">User role</a>
-                                <a className="nav-item nav-link text-white" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Settings</a>
+                        <Tabs>
+                            <TabList className="nav justify-content-center bg-secondary">
+                                <Tab className="nav-item nav-link">Profile</Tab>
+                                <Tab className="nav-item nav-link">User role</Tab>
+                                <Tab className="nav-item nav-link">Settings</Tab>
+                            </TabList>
+                            <div className="row">
+                                <div className="col-sm-4">
+                                    <Avatar
+                                        size="large"
+                                        title="LW"
+                                        onPress={() => console.log("Works!")}
+                                        activeOpacity={0.7}
+                                        source={{
+                                            uri:
+                                                'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+                                        }}
+                                    />
+                                </div>
+                                <div className="col-sm-8">
+                                    <TabPanel>
+                                        <UserProfile />
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <UserRole />
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <UserEnabling />
+                                    </TabPanel>
+                                </div>
                             </div>
-                        </nav>
-                        <div className="tab-content" id="nav-tabContent">
-                            <div className="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"><UserProfile /></div>
-                            <div className="tab-pane fade" id="nav-role" role="tabpanel" aria-labelledby="nav-role-tab">...</div>
-                            <div className="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">...</div>
-                        </div>
+                        </Tabs>
                     </div>
                 </div>
-
-
-            </div >
+            </div>
         );
     }
 }
@@ -112,37 +135,121 @@ class UserProfile extends React.Component {
     }
 
     render() {
-        return <div className="row">
-            <div className="col-sm-4">
-                <img src="" alt="" width="189" height="255" className="img-thumbnail" />
+        return <div>
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1">Name</span>
+                </div>
+                <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
             </div>
-            <div className="col-sm-8">
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="basic-addon1">Name</span>
-                    </div>
-                    <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1">Email</span>
                 </div>
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="basic-addon1">Email</span>
-                    </div>
-                    <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
+                <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
+            </div>
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1">Skype</span>
                 </div>
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="basic-addon1">Skype</span>
-                    </div>
-                    <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
+                <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
+            </div>
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                    <span className="input-group-text" id="basic-addon1">Signature</span>
                 </div>
-                <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="basic-addon1">Signature</span>
-                    </div>
-                    <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
-                </div>
+                <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
             </div>
         </div>
+    }
+}
+
+class UserRole extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.onTextChanged = this.onTextChanged.bind(this);
+    }
+
+    onTextChanged(e) {
+        var text = e.target.value.trim();   // удаляем пробелы
+        this.props.filter(text); // передаем введенный текст в родительский компонент
+    }
+
+    render() {
+        return <div>
+            <form>
+                <div className="radio">
+                    <label>
+                        <input type="radio" value="User"
+                            //checked={this.state.selectedOption === 'User'}
+                            onChange={this.handleOptionChange} />
+                        User
+                     </label>
+                </div>
+                <div className="radio">
+                    <label>
+                        <input type="radio" value="Manager"
+                            //checked={this.state.selectedOption === 'Manager'}
+                            onChange={this.handleOptionChange} />
+                        Manager
+                    </label>
+                </div>
+                <div className="radio">
+                    <label>
+                        <input type="radio" value="Admin"
+                            //checked={this.state.selectedOption === 'Admin'}
+                            onChange={this.handleOptionChange} />
+                        Admin
+                     </label>
+                </div>
+                <div className="radio">
+                    <label>
+                        <input type="radio" value="Support"
+                            //checked={this.state.selectedOption === 'Support'}
+                            onChange={this.handleOptionChange} />
+                        Support
+                     </label>
+                </div>
+            </form>
+        </div>
+    }
+}
+
+class UserEnabling extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            isChecked: null
+        }
+        this.onTextChanged = this.onTextChanged.bind(this);
+    }
+
+    componentWillMount() {
+        this.setState({ isChecked: this.props.isChecked });
+    }
+
+    onTextChanged(e) {
+        var text = e.target.value.trim();   // удаляем пробелы
+        this.props.filter(text); // передаем введенный текст в родительский компонент
+    }
+
+    render() {
+        return <div className="switch-container">Enable
+            <label>
+                <input ref="switch" checked={this.state.isChecked} onChange={this._handleChange} className="switch" type="checkbox" />
+                <div>
+                    <div>
+                        
+                    </div>
+                </div>
+            </label>
+        </div>
+    }
+
+    _handleChange() {
+        this.setState({ isChecked: !this.state.isChecked });
     }
 }
 
