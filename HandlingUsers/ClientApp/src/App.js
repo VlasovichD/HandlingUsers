@@ -5,6 +5,6 @@ import Home from './components/Home';
 
 export default () => (
   <Layout>
-        <Route exact path='/:startDateIndex?' component={Home} />
+        <Route exact path='/:startIdIndex?' component={Home} />
   </Layout>
 );

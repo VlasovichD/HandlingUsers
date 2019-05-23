@@ -6,6 +6,8 @@ using BusinessLogicLayer.Infrastructure;
 using BusinessLogicLayer.Interfaces;
 using HandlingUsers.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -41,17 +43,17 @@ namespace AgileBoard.Controllers
             {
                 var userDTO = _mapper.Map<UserDTO>(user);
                 // TODO: save avatars
-                if (user.Avatar != null)
-                {
-                    byte[] imageData = null;
-                    // считываем переданный файл в массив байтов
-                    using (BinaryReader binaryReader = new BinaryReader(user.Avatar.OpenReadStream()))
-                    {
-                        imageData = binaryReader.ReadBytes((int)user.Avatar.Length);
-                    }
-                    // установка массива байтов
-                    userDTO.Avatar = imageData;
-                }
+                //if (user.Avatar != null)
+                //{
+                //    byte[] imageData = null;
+                //    // считываем переданный файл в массив байтов
+                //    using (BinaryReader binaryReader = new BinaryReader(user.Avatar.OpenReadStream()))
+                //    {
+                //        imageData = binaryReader.ReadBytes((int)user.Avatar.Length);
+                //    }
+                //    // установка массива байтов
+                //    userDTO.Avatar = imageData;
+                //}
                 // TODO: check verification
                 // add user role by default
                 userDTO.Role = RoleType.User.ToString();
@@ -76,7 +78,9 @@ namespace AgileBoard.Controllers
             try
             {
                 var userDtos = _userService.Get(start, count);
+                
                 //TODO: return only id`s, names and small avatars
+                                
                 return Ok(_mapper.Map<List<UserModel>>(userDtos));
             }
             catch (ValidationException ex)
@@ -115,17 +119,17 @@ namespace AgileBoard.Controllers
                 userDTO.Id = id;
 
                 // TODO: update avatars
-                if (user.Avatar != null)
-                {
-                    byte[] imageData = null;
-                    // считываем переданный файл в массив байтов
-                    using (BinaryReader binaryReader = new BinaryReader(user.Avatar.OpenReadStream()))
-                    {
-                        imageData = binaryReader.ReadBytes((int)user.Avatar.Length);
-                    }
-                    // установка массива байтов
-                    userDTO.Avatar = imageData;
-                }
+                //if (user.Avatar != null)
+                //{
+                //    byte[] imageData = null;
+                //    // считываем переданный файл в массив байтов
+                //    using (BinaryReader binaryReader = new BinaryReader(user.Avatar.OpenReadStream()))
+                //    {
+                //        imageData = binaryReader.ReadBytes((int)user.Avatar.Length);
+                //    }
+                //    // установка массива байтов
+                //    userDTO.Avatar = imageData;
+                //}
 
                 // save
                 _userService.Update(userDTO);
