@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace DataAccessLayer.EF
@@ -19,13 +20,9 @@ namespace DataAccessLayer.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var jsonUsersList = System.IO.File.ReadAllText("seed.json");
-            var states = JsonConvert.DeserializeObject<List<User>>(jsonUsersList);
+            var users = JsonConvert.DeserializeObject<User[]>(File.ReadAllText("seed.json"));
 
-            modelBuilder.Entity<User>().HasData(states
-                 //new User { Id = 1, Name = "Ivan Ivanov", Email = "ivanov@test.com", Skype = null, Signature = null, Avatar = null, Role = null, Enabled = true },
-                 //new User { Id = 2, Name = "Petr Petrov", Email = "petrov@test.com", Skype = null, Signature = null, Avatar = null, Role = null, Enabled = true }
-                 );
+            modelBuilder.Entity<User>().HasData(users);
 
             base.OnModelCreating(modelBuilder);
         }

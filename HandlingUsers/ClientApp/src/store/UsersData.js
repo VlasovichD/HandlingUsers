@@ -12,7 +12,7 @@ export const actionCreators = {
         dispatch({ type: requestUsersDataType, startIdIndex });
 
         //const url = `api/Users/usersData?startIdIndex=${startIdIndex}`;
-        const url = `api/Users/0/10`;
+        const url = `api/Users/0/20`;
         const response = await fetch(url);
         const users = await response.json();
 
