@@ -1,55 +1,63 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
 import "react-tabs/style/react-tabs.css";
-import { Link } from 'react-router-dom';
-import { actionCreators } from '../store/UsersData';
-import UserMenu from './UserMenu';
-import './UserEnabling.css';
-import Avatar from 'react-avatar-edit';
-import UserProfile from './UserProfile';
-import UserRole from './UserRole';
-import UserSettings from './UserSettings';
+import './site.css';
 import SearchPlugin from './SearchPlugin';
 import UserList from './UserList';
 import ActiveUser from './ActiveUser';
 
-class Home extends Component {
+export class Home extends Component {
+
     constructor(props) {
         super(props);
+
         this.state = {
-            users: this.props.users,
+            users: [],
+            initData: [],
+            start: 0,
+            count: 20,
             preview: null,
-            src: this.props.src,
-            active: 1
+            src: null,
+            isLoading: true,
+            active: 0,
+            term: ''
         };
 
-        this.filterList = this.filterList.bind(this);
+        this.loadData();
+
         this.onCrop = this.onCrop.bind(this)
         this.onClose = this.onClose.bind(this)
     }
 
-    componentDidMount() {
-        // This method is called when the component is first added to the document
-        this.ensureDataFetched();
+    loadData() {
+        fetch(`api/Users/0/${this.state.count}`)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ users: data, initData: data, isLoading: false, start: this.state.start + this.state.count });
+            });
     }
 
-    componentDidUpdate() {
-        // This method is called when the route parameters change
-        this.ensureDataFetched();
+    addData(start, count) {
+        fetch(`api/Users/${start}/${count}`)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    users: this.state.users.concat(data),
+                    initData: this.state.initData.concat(data),
+                    start: this.state.start + this.state.count
+                });
+            });
     }
 
-    ensureDataFetched() {
-        const startIdIndex = parseInt(this.props.match.params.startIdIndex, 10) || 0;
-        this.props.requestUsersData(startIdIndex);
-    }
 
-    filterList(text) {
-        var filteredList = this.props.users.filter(function (user) {
-            return user.name.toLowerCase().search(text.toLowerCase()) !== -1;
-        });
-        this.setState({ users: filteredList });
+
+    onScrollList(event) {
+        const scrollBottom = event.target.scrollTop +
+            event.target.offsetHeight === event.target.scrollHeight;
+
+        if (scrollBottom) {
+            this.addData(this.state.start, this.state.count); //API method
+        }
     }
 
     onClose() {
@@ -58,6 +66,10 @@ class Home extends Component {
 
     onCrop(preview) {
         this.setState({ preview })
+    }
+
+    onClickUpdate(e) {
+        this.setState({ isUpdated: true });
     }
 
     updateData(config) {
@@ -73,17 +85,21 @@ class Home extends Component {
                             <button className="btn btn-light btn-block text-left">&#8853; Add user</button>
                         </div>
                         <div>
-                            <SearchPlugin filter={this.filterList} />
+                            <SearchPlugin
+                                term={this.state.term}
+                                data={this.state.initData}
+                                update={this.updateData.bind(this)}
+                            />
                         </div>
                         <div>
                             {renderEnablingMenu(this.props)}
                         </div>
-                        <div id="sidebar">
-                            <UserList data={this.state.users} update={this.updateData.bind(this)} />
+                        <div className="sidebar" onScroll={event => this.onScrollList(event)}>
+                            <UserList data={this.state} update={this.updateData.bind(this)} />
                         </div>
                     </div>
                     <div className="col-sm-9">
-                        <ActiveUser data={this.state} active={this.state.active} />
+                        <ActiveUser data={this.state} update={this.updateData.bind(this)} active={this.state.active} onCrop={this.onCrop} />
                     </div>
                 </div>
             </div>
@@ -92,17 +108,13 @@ class Home extends Component {
 }
 
 function renderEnablingMenu(props) {
-    const prevStartIdIndex = (props.startIdIndex || 0) - 5;
-    const nextStartIdIndex = (props.startIdIndex || 0) + 5;
 
     return <nav className="nav nav nav-fill">
-        <a className="nav-item nav-link text-dark" href={`/${prevStartIdIndex}`}><strong>Enabled</strong></a>
-        <a className="nav-item nav-link text-dark" href={`/${nextStartIdIndex}`}>Disabled</a>
-        {props.isLoading ? <span>Loading...</span> : []}
+        <span> <button type="button" className="btn btn-light"
+        //onClick={this.onClickUpdate}
+        ><strong>Enabled</strong></button> </span>
+        <span> <button type="button" className="btn btn-light"
+        //onClick={this.onClickUpdate}
+        >Disabled</button> </span>
     </nav>;
 }
-
-export default connect(
-    state => state.usersData,
-    dispatch => bindActionCreators(actionCreators, dispatch)
-)(Home);
