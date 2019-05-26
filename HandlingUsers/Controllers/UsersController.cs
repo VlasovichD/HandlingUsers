@@ -71,13 +71,13 @@ namespace AgileBoard.Controllers
             }
         }
 
-        // GET api/users/{start}/{count}
-        [HttpGet("{start}/{count}")]
-        public IActionResult Get(int start, int count)
+        // GET api/users/{start}/{count}/{enabled}
+        [HttpGet("{start}/{count}/{enabled}")]
+        public IActionResult Get(int start, int count, bool enabled)
         {
             try
             {
-                var userDtos = _userService.Get(start, count);
+                var userDtos = _userService.Get(start, count, enabled);
                 
                 //TODO: return only id`s, names and small avatars
                                 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import "react-tabs/style/react-tabs.css";
 import './site.css';
+import SwitchMenu from './SwitchMenu';
 import SearchPlugin from './SearchPlugin';
 import UserList from './UserList';
 import ActiveUser from './ActiveUser';
@@ -20,36 +21,59 @@ export class Home extends Component {
             src: null,
             isLoading: true,
             active: 0,
-            term: ''
+            term: '',
+            enabled: true
         };
 
-        this.loadData();
+       // this.onCrop = this.onCrop.bind(this);
+       // this.onClose = this.onClose.bind(this);
+      //  this.onScrollList = this.onScrollList.bind(this);
+    }
 
-        this.onCrop = this.onCrop.bind(this)
-        this.onClose = this.onClose.bind(this)
+    componentDidMount() {
+        this.loadData();
+    }
+
+    componentDidUpdate() {
+        //this.loadData();
     }
 
     loadData() {
-        fetch(`api/Users/0/${this.state.count}`)
+        fetch(`api/Users/0/${this.state.count}/${this.state.enabled}`)
             .then(response => response.json())
             .then(data => {
-                this.setState({ users: data, initData: data, isLoading: false, start: this.state.start + this.state.count });
+                this.setState({users: data, initData: data, isLoading: false, start: this.state.start + this.state.count });
             });
     }
 
     addData(start, count) {
-        fetch(`api/Users/${start}/${count}`)
+        fetch(`api/Users/${start}/${count}/${this.state.enabled}`)
             .then(response => response.json())
             .then(data => {
                 this.setState({
                     users: this.state.users.concat(data),
                     initData: this.state.initData.concat(data),
-                    start: this.state.start + this.state.count
+                    start: this.state.users.length + this.state.count
                 });
             });
     }
 
-
+    addUser(start, count) {
+    //    this.setState({
+    //        users: this.state.users.push(data),
+    //        initData: this.state.initData.concat(data),
+    //        start: this.state.users.length + this.state.count
+    //    });
+    //    fetch(`api/Users/${start}/${count}/${this.state.enabled}`)
+    //        .then(response => response.json())
+    //        .then(data => {
+    //            this.setState({
+    //                users: this.state.users.concat(data),
+    //                initData: this.state.initData.concat(data),
+    //                start: this.state.users.length + this.state.count
+    //            });
+    //        });
+    }
 
     onScrollList(event) {
         const scrollBottom = event.target.scrollTop +
@@ -76,13 +100,22 @@ export class Home extends Component {
         this.setState(config);
     }
 
+    reloadData(config) {
+        this.setState(config);
+        this.setState({ active: 0, start: 0 });
+        this.loadData();
+    }
+
     render() {
         return (
             <div className="container">
                 <div className="row bg-light">
                     <div className="col-sm-3">
                         <div className="input-group mb-3">
-                            <button className="btn btn-light btn-block text-left">&#8853; Add user</button>
+                            <button
+                                className="btn btn-light btn-block text-left"
+                                onClick={this.addUser.bind(this)}
+                            >&#8853; Add user</button>
                         </div>
                         <div>
                             <SearchPlugin
@@ -92,29 +125,30 @@ export class Home extends Component {
                             />
                         </div>
                         <div>
-                            {renderEnablingMenu(this.props)}
+                            <SwitchMenu
+                                data={this.state}
+                                update={this.reloadData.bind(this)}
+                                enabled={this.state.enabled}
+                            />
                         </div>
                         <div className="sidebar" onScroll={event => this.onScrollList(event)}>
-                            <UserList data={this.state} update={this.updateData.bind(this)} />
+                            <UserList
+                                data={this.state}
+                                update={this.updateData.bind(this)}
+                            />
                         </div>
                     </div>
                     <div className="col-sm-9">
-                        <ActiveUser data={this.state} update={this.updateData.bind(this)} active={this.state.active} onCrop={this.onCrop} />
+                        {console.log(this.state)}
+                        <ActiveUser
+                            data={this.state}
+                            update={this.updateData.bind(this)}
+                            active={this.state.active}
+                            onCrop={this.onCrop}
+                        />
                     </div>
                 </div>
             </div>
         );
     }
-}
-
-function renderEnablingMenu(props) {
-
-    return <nav className="nav nav nav-fill">
-        <span> <button type="button" className="btn btn-light"
-        //onClick={this.onClickUpdate}
-        ><strong>Enabled</strong></button> </span>
-        <span> <button type="button" className="btn btn-light"
-        //onClick={this.onClickUpdate}
-        >Disabled</button> </span>
-    </nav>;
 }

@@ -45,9 +45,9 @@ namespace BusinessLogicLayer.Services
             return _mapper.Map<UserDTO>(user);
         }
 
-        public IEnumerable<UserDTO> Get(int start, int count)
+        public IEnumerable<UserDTO> Get(int start, int count, bool enabled)
         {
-            var users = _database.Users.GetAll().Skip(start).Take(count);
+            var users = _database.Users.Find(u => u.Enabled == enabled).Skip(start).Take(count);
 
             if (users == null)
                 throw new ValidationException("List of users is empty");

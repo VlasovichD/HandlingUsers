@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({ user, update, index }) => {
+export default ({ user, active, update, index }) => {
     return (
         <tr onClick={() => update({ active: index })}>
             <td><img
@@ -11,7 +11,7 @@ export default ({ user, update, index }) => {
                 alt=" "
                 
             /></td>
-            <td>{user.name}</td>
+            <td>{(active === index) ? <strong>{user.name}</strong> : <span>{user.name}</span>}</td>
         </tr>
     );
 };

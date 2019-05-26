@@ -1,9 +1,9 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Avatar from 'react-avatar-edit';
-import UserProfile from './UserProfile';
-import UserRole from './UserRole';
-import UserSettings from './UserSettings';
+import { UserProfile } from './UserProfile';
+import { UserRole } from './UserRole';
+import { UserSettings } from './UserSettings';
 import './site.css';
 
 export default ({ data, update, active }) => {

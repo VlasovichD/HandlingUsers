@@ -1,92 +1,79 @@
 import React from 'react';
 
-export default ({ user, update, index }) => {
+export class UserRole extends React.Component {
+    constructor(props) {
+        super(props);
 
-    //onTextChanged(e) {
-    //    var text = e.target.value.trim();   // удаляем пробелы
-    //    this.props.filter(text); // передаем введенный текст в родительский компонент
-    //}
+        this.state = {
+            user: props.user,
+            isUpdated: false,
+        };
 
-    return (
-        <div>
-            <form>
-                <div className="radio">
-                    <div className="row bg-light">
-                        <div className="col-sm-3">
-                            <input type="radio" value="User"
-                                //checked={this.state.selectedOption === 'User'}
-                                onChange={this.handleOptionChange} />
-                            <div>User</div>
-                        </div>
-                        <div className="col-sm-3">
-                            <input type="radio" value="Manager"
-                                //checked={this.state.selectedOption === 'Manager'}
-                                onChange={this.handleOptionChange} />
-                            <div>Manager</div>
-                        </div>
-                        <div className="col-sm-3">
-                            <input type="radio" value="Admin"
-                                //checked={this.state.selectedOption === 'Admin'}
-                                onChange={this.handleOptionChange} />
-                            <div>Admin</div>
-                        </div>
-                        <div className="col-sm-3">
-                            <input type="radio" value="Support"
-                                //checked={this.state.selectedOption === 'Support'}
-                                onChange={this.handleOptionChange} />
-                            <div>Support</div>
+        this.handleChange = this.handleChange.bind(this);
+        // this.handleUpdate = this.handleUpdate.bind(this);
+    }
+
+    handleChange(event) {
+        const { name, value } = event.target;
+        const { user } = this.state;
+        this.setState({
+            user: {
+                ...user,
+                [name]: value
+            }
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <form>
+                    <div className="radio">
+                        <div className="row bg-light">
+                            <div className="col-sm-3">
+                                <input
+                                    type="radio"
+                                    name="role"
+                                    value="User"
+                                    checked={this.state.user.role === 'User'}
+                                    onChange={this.handleChange}
+                                />
+                                <div>User</div>
+                            </div>
+                            <div className="col-sm-3">
+                                <input
+                                    type="radio"
+                                    name="role"
+                                    value="Manager"
+                                    checked={this.state.user.role === 'Manager'}
+                                    onChange={this.handleChange}
+                                />
+                                <div>Manager</div>
+                            </div>
+                            <div className="col-sm-3">
+                                <input
+                                    type="radio"
+                                    name="role"
+                                    value="Admin"
+                                    checked={this.state.user.role === 'Admin'}
+                                    onChange={this.handleChange}
+                                />
+                                <div>Admin</div>
+                            </div>
+                            <div className="col-sm-3">
+                                <input
+                                    type="radio"
+                                    name="role"
+                                    value="Support"
+                                    checked={this.state.user.role === 'Support'}
+                                    onChange={this.handleChange}
+                                />
+                                <div>Support</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-        </div>
-    );
+                </form>
+            </div>
+        );
+    };
 };
-
-//export class UserRole extends Component {
-
-//    constructor(props) {
-//        super(props);
-//        this.onTextChanged = this.onTextChanged.bind(this);
-//    }
-
-//    onTextChanged(e) {
-//        var text = e.target.value.trim();   // удаляем пробелы
-//        this.props.filter(text); // передаем введенный текст в родительский компонент
-//    }
-
-//    render() {
-//        return <div>
-//            <form>
-//                <div className="radio">
-//                    <div className="row bg-light">
-//                        <div className="col-sm-3">
-//                            <input type="radio" value="User"
-//                                //checked={this.state.selectedOption === 'User'}
-//                                onChange={this.handleOptionChange} />
-//                            <div>User</div>
-//                        </div>
-//                        <div className="col-sm-3">
-//                            <input type="radio" value="Manager"
-//                                //checked={this.state.selectedOption === 'Manager'}
-//                                onChange={this.handleOptionChange} />
-//                            <div>Manager</div>
-//                        </div>
-//                        <div className="col-sm-3">
-//                            <input type="radio" value="Admin"
-//                                //checked={this.state.selectedOption === 'Admin'}
-//                                onChange={this.handleOptionChange} />
-//                            <div>Admin</div>
-//                        </div>
-//                        <div className="col-sm-3">
-//                            <input type="radio" value="Support"
-//                                //checked={this.state.selectedOption === 'Support'}
-//                                onChange={this.handleOptionChange} />
-//                            <div>Support</div>
-//                        </div>
-//                    </div>
-//                </div>
-//            </form>
-//        </div>
-//    }
-//}
