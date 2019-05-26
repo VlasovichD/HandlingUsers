@@ -26,15 +26,30 @@ export default ({ data, update, active }) => {
     });
 
     const userProfile = data.users.map((user, index) => {
-        return (<UserProfile user={user} index={index} key={user.id} update={update} />);
+        return (<UserProfile
+            user={user}
+            index={index}
+            key={user.id}
+            update={update}
+        />);
     });
 
     const userRole = data.users.map((user, index) => {
-        return (<UserRole user={user} index={index} key={user.id} update={update} />);
+        return (<UserRole
+            user={user}
+            index={index}
+            key={user.id}
+            update={update}
+        />);
     });
 
     const userSettings = data.users.map((user, index) => {
-        return (<UserSettings user={user} index={index} key={user.id} update={update} />);
+        return (<UserSettings
+            user={user}
+            index={index}
+            key={user.id}
+            update={update}
+        />);
     });
 
     return (

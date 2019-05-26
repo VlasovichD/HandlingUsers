@@ -5,7 +5,13 @@ import './site.css';
 export default ({ data, update }) => {
 
     const users = data.users.map((user, index) => {
-        return (<UserData user={user} active={data.active} index={index} key={user.id} update={update} />);
+        return (<UserData
+            user={user}
+            active={data.active}
+            index={index}
+            key={user.id}
+            update={update}
+        />);
     });
 
     return (

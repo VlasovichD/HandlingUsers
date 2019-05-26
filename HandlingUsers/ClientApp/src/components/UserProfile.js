@@ -22,8 +22,18 @@ export class UserProfile extends React.Component {
                 [name]: value
             }
         });
+        this.update(user);
     }
 
+    update(user) {
+        const requestOptions = {
+            method: 'PUT',
+            body: JSON.stringify(user)
+        };
+
+        return fetch(`/api/Users/${user.id}`, requestOptions);
+        //.then(handleResponse);
+    }
     //handleUpdate(event) {
     //    event.preventDefault();
 

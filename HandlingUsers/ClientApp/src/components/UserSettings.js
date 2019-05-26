@@ -11,22 +11,9 @@ export class UserSettings extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        // this.handleUpdate = this.handleUpdate.bind(this);
     }
 
-    //handleChange(event) {
-    //    const { name, value } = event.target;
-    //    const { user } = this.state;
-    //    this.setState({
-    //        user: {
-    //            ...user,
-    //            [name]: !value
-    //        }
-    //    });
-    //}
-
     handleChange(event) {
-        const { name, value } = event.target;
         const { user } = this.state;
         this.setState({
             user: {
