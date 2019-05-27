@@ -52,16 +52,6 @@ export default class App extends Component {
             });
     }
 
-    update(user) {
-        const requestOptions = {
-            method: 'PUT',
-            body: JSON.stringify(user)
-        };
-
-        return fetch(`/api/Users/${user.id}`, requestOptions);
-        //.then(handleResponse);
-    }
-
     addUser(start, count) {
         const data = {
             name: null,
@@ -72,21 +62,12 @@ export default class App extends Component {
             role: 'User',
             enabled: true
         }
+
         this.setState({
             users: this.state.users.concat(data),
             initData: this.state.initData.concat(data),
             active: this.state.users.length
-            //start: this.state.users.length + this.state.count
         });
-        //    fetch(`api/Users/${start}/${count}/${this.state.enabled}`)
-        //        .then(response => response.json())
-        //        .then(data => {
-        //            this.setState({
-        //                users: this.state.users.concat(data),
-        //                initData: this.state.initData.concat(data),
-        //                start: this.state.users.length + this.state.count
-        //            });
-        //        });
     }
 
     onScrollList(event) {
@@ -106,11 +87,6 @@ export default class App extends Component {
     onCrop(preview) {
         this.setState({ preview })
     }
-
-    //onClickUpdate(e) {
-    //    e.preventDefault();
-    //    this.setState({ isUpdated: true });
-    //}
 
     updateData(config) {
         this.setState(config);
@@ -155,12 +131,12 @@ export default class App extends Component {
                         </div>
                     </div>
                     <div className="col-sm-9">
-                        {console.log(this.state)}
                         <ActiveUser
                             data={this.state}
                             update={this.updateData.bind(this)}
                             active={this.state.active}
                             onCrop={this.onCrop}
+                            onClose={this.onClose}
                         />
                     </div>
                 </div>

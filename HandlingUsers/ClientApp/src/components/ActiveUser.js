@@ -63,14 +63,6 @@ export default ({ data, update, active }) => {
                 <div className="row mt-3">
                     <div className="col-sm-4">
                         {userAvatar[active]}
-                        {/*<Avatar
-                            width={150}
-                            height={200}
-                            onCrop={this.onCrop}
-                            onClose={this.onClose}
-                            src={data.src}
-                            label={"User image"}
-                        />*/}
                         <img
                             src={data.preview}
                             alt="Preview" />

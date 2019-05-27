@@ -10,7 +10,6 @@ export class UserProfile extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        // this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     handleChange(event) {
@@ -32,25 +31,7 @@ export class UserProfile extends React.Component {
         };
 
         return fetch(`/api/Users/${user.id}`, requestOptions);
-        //.then(handleResponse);
     }
-    //handleUpdate(event) {
-    //    event.preventDefault();
-
-    //    this.setState({ submitted: true });
-    //    const { ticket } = this.state;
-    //    ticket.user.username = this.props.user.username;
-    //    const { dispatch } = this.props;
-    //    if (ticket.name && ticket.description) {
-    //        dispatch(ticketActions.update(ticket));
-    //        this.setState({ isUpdated: false });
-    //    }
-    //}
-
-    //onTextChanged(e) {
-    //    var text = e.target.value.trim();   // удаляем пробелы
-    //    this.props.filter(text); // передаем введенный текст в родительский компонент
-    //}
 
     render() {
         return (
@@ -113,52 +94,3 @@ export class UserProfile extends React.Component {
         );
     };
 };
-
-//export class UserProfile extends Component {
-
-//    constructor(props) {
-//        super(props);
-
-//        this.state = {
-//            user: this.props.user,
-
-
-//        };
-//        this.onTextChanged = this.onTextChanged.bind(this);
-//    }
-
-//    onTextChanged(e) {
-//        var text = e.target.value.trim();   // удаляем пробелы
-//        this.props.filter(text); // передаем введенный текст в родительский компонент
-//    }
-
-//    render() {
-//        return <div>
-//            <div className="input-group mb-3">
-//                <div className="input-group-prepend">
-//                    <span className="input-group-text" id="basic-addon1">Name</span>
-//                </div>
-//                {console.log()}
-//                <input type="text" className="form-control" value={this.state.user} aria-label="Username" aria-describedby="basic-addon1" />
-//            </div>
-//            <div className="input-group mb-3">
-//                <div className="input-group-prepend">
-//                    <span className="input-group-text" id="basic-addon1">Email</span>
-//                </div>
-//                <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
-//            </div>
-//            <div className="input-group mb-3">
-//                <div className="input-group-prepend">
-//                    <span className="input-group-text" id="basic-addon1">Skype</span>
-//                </div>
-//                <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
-//            </div>
-//            <div className="input-group mb-3">
-//                <div className="input-group-prepend">
-//                    <span className="input-group-text" id="basic-addon1">Signature</span>
-//                </div>
-//                <input type="text" className="form-control" aria-label="Username" aria-describedby="basic-addon1" />
-//            </div>
-//        </div>
-//    }
-//}

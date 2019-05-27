@@ -10,7 +10,6 @@ export class UserRole extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        // this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     handleChange(event) {
