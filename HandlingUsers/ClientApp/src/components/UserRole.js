@@ -10,6 +10,7 @@ export class UserRole extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     handleChange(event) {
@@ -21,6 +22,17 @@ export class UserRole extends React.Component {
                 [name]: value
             }
         });
+    }
+
+    handleUpdate(event) {
+        const { user } = this.state;
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        };
+
+        return fetch(`/api/Users/${user.id}`, requestOptions);
     }
 
     render() {
@@ -36,6 +48,7 @@ export class UserRole extends React.Component {
                                     value="User"
                                     checked={this.state.user.role === 'User'}
                                     onChange={this.handleChange}
+                                    onBlur={this.handleUpdate}
                                 />
                                 <div>User</div>
                             </div>
@@ -46,6 +59,7 @@ export class UserRole extends React.Component {
                                     value="Manager"
                                     checked={this.state.user.role === 'Manager'}
                                     onChange={this.handleChange}
+                                    onBlur={this.handleUpdate}
                                 />
                                 <div>Manager</div>
                             </div>
@@ -56,6 +70,7 @@ export class UserRole extends React.Component {
                                     value="Admin"
                                     checked={this.state.user.role === 'Admin'}
                                     onChange={this.handleChange}
+                                    onBlur={this.handleUpdate}
                                 />
                                 <div>Admin</div>
                             </div>
@@ -66,6 +81,7 @@ export class UserRole extends React.Component {
                                     value="Support"
                                     checked={this.state.user.role === 'Support'}
                                     onChange={this.handleChange}
+                                    onBlur={this.handleUpdate}
                                 />
                                 <div>Support</div>
                             </div>

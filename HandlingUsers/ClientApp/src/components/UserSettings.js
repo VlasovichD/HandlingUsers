@@ -11,6 +11,7 @@ export class UserSettings extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     handleChange(event) {
@@ -23,6 +24,17 @@ export class UserSettings extends React.Component {
         });
     }
 
+    handleUpdate(event) {
+        const { user } = this.state;
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(user)
+        };
+
+        return fetch(`/api/Users/${user.id}`, requestOptions);
+    }
+
     render() {
         return <div>
             <span>{this.state.user.enabled ? 'Disable' : 'Enable'}</span>
@@ -31,6 +43,7 @@ export class UserSettings extends React.Component {
                     type="checkbox"
                     checked={this.state.user.enabled}
                     onChange={this.handleChange}
+                    onBlur={this.handleUpdate}
                 />
                 <span className="slider round"></span>
             </label>

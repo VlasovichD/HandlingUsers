@@ -26,6 +26,9 @@ export default class App extends Component {
             term: '',
             enabled: true
         };
+        this.onCrop = this.onCrop.bind(this)
+        this.onClose = this.onClose.bind(this)
+        this.onBeforeFileLoad = this.onBeforeFileLoad.bind(this)
     }
 
     componentDidMount() {
@@ -54,11 +57,11 @@ export default class App extends Component {
 
     addUser(start, count) {
         const data = {
-            name: null,
-            email: null,
-            skype: null,
-            signature: null,
-            avatar: null,
+            name: '',
+            email: '',
+            skype: '',
+            signature: '',
+            avatar: '',
             role: 'User',
             enabled: true
         }
@@ -76,16 +79,35 @@ export default class App extends Component {
             event.target.offsetHeight === event.target.scrollHeight;
 
         if (scrollBottom) {
-            this.addData(this.state.start, this.state.count); //API method
+            this.addData(this.state.start, this.state.count);
         }
     }
 
     onClose() {
+        //const { user } = this.state.users[this.state.active];
+        //this.setState({ user: { id: this.state.active, avatar: this.state.preview } })
+        //const requestOptions = {
+        //    method: 'PUT',
+        //    headers: { 'Content-Type': 'application/json' },
+        //    body: JSON.stringify(user)
+        //};
         this.setState({ preview: null })
+        //return fetch(`/api/Users/${user.id}`, requestOptions);
+    }
+
+    handleUpdate(event) {
+
     }
 
     onCrop(preview) {
         this.setState({ preview })
+    }
+
+    onBeforeFileLoad(elem) {
+        if (elem.target.files[0].size > 71680) {
+            alert("File is too big!");
+            elem.target.value = "";
+        };
     }
 
     updateData(config) {
@@ -105,9 +127,9 @@ export default class App extends Component {
                     <div className="col-sm-3">
                         <div className="input-group mb-3">
                             <button
-                                className="btn btn-light btn-block text-left"
+                                className="btn btn-outline-secondary btn-block text-center"
                                 onClick={this.addUser.bind(this)}
-                            >&#8853; Add user</button>
+                            >Add user</button>
                         </div>
                         <div>
                             <SearchPlugin
@@ -137,6 +159,7 @@ export default class App extends Component {
                             active={this.state.active}
                             onCrop={this.onCrop}
                             onClose={this.onClose}
+                            onBeforeFileLoad={this.onBeforeFileLoad}
                         />
                     </div>
                 </div>

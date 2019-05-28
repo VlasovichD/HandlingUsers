@@ -10,6 +10,7 @@ export class UserProfile extends React.Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
     }
 
     handleChange(event) {
@@ -21,12 +22,13 @@ export class UserProfile extends React.Component {
                 [name]: value
             }
         });
-        this.update(user);
     }
 
-    update(user) {
+    handleUpdate(event) {
+        const { user } = this.state;
         const requestOptions = {
             method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
         };
 
@@ -47,6 +49,8 @@ export class UserProfile extends React.Component {
                         value={this.state.user.name}
                         placeholder="Firstname Lastname"
                         onChange={this.handleChange}
+                        onBlur={this.handleUpdate}
+                        required
                     />
                 </div>
                 <div className="input-group mb-3">
@@ -60,6 +64,8 @@ export class UserProfile extends React.Component {
                         value={this.state.user.email}
                         placeholder="example@mail.com"
                         onChange={this.handleChange}
+                        onBlur={this.handleUpdate}
+                        required
                     />
                 </div>
                 <div className="input-group mb-3">
@@ -75,6 +81,7 @@ export class UserProfile extends React.Component {
                         value={this.state.user.skype}
                         placeholder="live: skype"
                         onChange={this.handleChange}
+                        onBlur={this.handleUpdate}
                     />
                 </div>
                 <div className="input-group mb-3">
@@ -88,6 +95,7 @@ export class UserProfile extends React.Component {
                         value={this.state.user.signature}
                         placeholder="Write your signature here..."
                         onChange={this.handleChange}
+                        onBlur={this.handleUpdate}
                     />
                 </div>
             </div>
