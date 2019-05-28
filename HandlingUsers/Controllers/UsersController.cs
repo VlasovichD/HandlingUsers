@@ -22,6 +22,7 @@ namespace AgileBoard.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [ValidateAntiForgeryToken]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -42,19 +43,7 @@ namespace AgileBoard.Controllers
             try
             {
                 var userDTO = _mapper.Map<UserDTO>(user);
-                // TODO: save avatars
-                //if (user.Avatar != null)
-                //{
-                //    byte[] imageData = null;
-                //    // считываем переданный файл в массив байтов
-                //    using (BinaryReader binaryReader = new BinaryReader(user.Avatar.OpenReadStream()))
-                //    {
-                //        imageData = binaryReader.ReadBytes((int)user.Avatar.Length);
-                //    }
-                //    // установка массива байтов
-                //    userDTO.Avatar = imageData;
-                //}
-                // TODO: check verification
+
                 // add user role by default
                 userDTO.Role = RoleType.User.ToString();
                 // make user enabled by default
@@ -78,9 +67,7 @@ namespace AgileBoard.Controllers
             try
             {
                 var userDtos = _userService.Get(start, count, enabled);
-                
-                //TODO: return only id`s, names and small avatars
-                                
+
                 return Ok(_mapper.Map<List<UserModel>>(userDtos));
             }
             catch (ValidationException ex)
@@ -111,25 +98,12 @@ namespace AgileBoard.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody, Bind("Name, Email, Skype, Signature, Avatar, Role, Enabled")] UserModel user)
         {
+
             try
             {
-                // TODO: check update verification
                 // map model to dto and set id
                 var userDTO = _mapper.Map<UserDTO>(user);
                 userDTO.Id = id;
-
-                // TODO: update avatars
-                //if (user.Avatar != null)
-                //{
-                //    byte[] imageData = null;
-                //    // считываем переданный файл в массив байтов
-                //    using (BinaryReader binaryReader = new BinaryReader(user.Avatar.OpenReadStream()))
-                //    {
-                //        imageData = binaryReader.ReadBytes((int)user.Avatar.Length);
-                //    }
-                //    // установка массива байтов
-                //    userDTO.Avatar = imageData;
-                //}
 
                 // save
                 _userService.Update(userDTO);
