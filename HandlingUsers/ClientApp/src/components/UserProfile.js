@@ -7,6 +7,7 @@ export class UserProfile extends React.Component {
         this.state = {
             user: props.user,
             isUpdated: false,
+            error: null,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -32,7 +33,12 @@ export class UserProfile extends React.Component {
             body: JSON.stringify(user)
         };
 
-        return fetch(`/api/Users/${user.id}`, requestOptions);
+        return fetch(`/api/Users/${user.id}`, requestOptions)
+            .then(response => {
+                if (!response.ok) {
+                    console.log(response.text());
+                }
+            });
     }
 
     render() {

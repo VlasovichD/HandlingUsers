@@ -8,11 +8,11 @@ namespace DataAccessLayer.Entities
     public class User
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Name is not set")]
         [MaxLength(50)]
-        [RegularExpression(@"^[A-Za-z\s]+$")]
+        [RegularExpression(@"^[A-Za-z\s]+$", ErrorMessage = "Name must have only letters and spaces")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Email is not set")]
         [EmailAddress]
         public string Email { get; set; }
         [MaxLength(50)]
