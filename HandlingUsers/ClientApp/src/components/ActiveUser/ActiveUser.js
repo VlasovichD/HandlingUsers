@@ -4,7 +4,7 @@ import Avatar from 'react-avatar-edit';
 import { UserProfile } from './UserProfile';
 import { UserRole } from './UserRole';
 import { UserSettings } from './UserSettings';
-import './site.css';
+import './ActiveUser.css';
 
 export default ({ data, update, active, onCrop, onClose, onBeforeFileLoad }) => {
 

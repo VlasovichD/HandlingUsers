@@ -60,37 +60,3 @@ input:checked + .slider:before {
     .slider.round:before {
         border-radius: 50%;
     }
-
-.sidebar {
-    background-color: #fff;
-    padding: 1rem;
-    height: 500px;
-    position: relative;
-}
-
-.sidebar-list {
-    padding-right: 1rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-y: auto;
-}
-
-.nav-item {
-    cursor: pointer;
-}
-
-.list-group tr {
-    cursor: pointer;
-}
-
-    .list-group tr:hover {
-        background-color: darkgray;
-    }
-
-img {
-    border-radius: 50%;
-    max-height:30px;
-}

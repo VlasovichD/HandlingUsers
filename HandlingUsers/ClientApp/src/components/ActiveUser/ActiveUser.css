@@ -1,0 +1,11 @@
+.nav-item {
+    cursor: pointer;
+}
+
+.list-group tr {
+    cursor: pointer;
+}
+
+    .list-group tr:hover {
+        background-color: darkgray;
+    }

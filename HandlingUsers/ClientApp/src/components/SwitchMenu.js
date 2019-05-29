@@ -1,5 +1,5 @@
 import React from 'react';
-import './site.css';
+//import './SwitchMenu.css';
 
 export default ({data, update, enabled }) => {
 

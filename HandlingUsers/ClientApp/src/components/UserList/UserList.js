@@ -1,6 +1,6 @@
 import React from 'react';
 import UserData from './UserData';
-import './site.css';
+import './UserList.css';
 
 export default ({ data, update }) => {
 

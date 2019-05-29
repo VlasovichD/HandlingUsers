@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-
 import "react-tabs/style/react-tabs.css";
-import './components/site.css';
+import './components/UserList/UserList.css';
 import SwitchMenu from './components/SwitchMenu';
 import SearchPlugin from './components/SearchPlugin';
-import UserList from './components/UserList';
-import ActiveUser from './components/ActiveUser';
+import UserList from './components/UserList/UserList';
+import ActiveUser from './components/ActiveUser/ActiveUser';
 
 
 export default class App extends Component {

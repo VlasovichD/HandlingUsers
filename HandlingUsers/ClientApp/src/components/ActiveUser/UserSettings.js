@@ -1,5 +1,5 @@
 import React from 'react';
-import './site.css';
+import './UserSettings.css';
 
 export class UserSettings extends React.Component {
     constructor(props) {
