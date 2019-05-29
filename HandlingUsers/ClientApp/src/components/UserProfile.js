@@ -27,18 +27,35 @@ export class UserProfile extends React.Component {
 
     handleUpdate(event) {
         const { user } = this.state;
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
-        };
+        if (user.key === -1) {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)
+            };
 
-        return fetch(`/api/Users/${user.id}`, requestOptions)
-            .then(response => {
+            return fetch(`/api/Users`, requestOptions)
+                .then(response => {
                 if (!response.ok) {
                     console.log(response.text());
                 }
             });
+        }
+        else
+        {
+            const requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(user)
+            };
+
+            return fetch(`/api/Users/${user.id}`, requestOptions)
+                .then(response => {
+                    if (!response.ok) {
+                        console.log(response.text());
+                    }
+                });
+        }
     }
 
     render() {

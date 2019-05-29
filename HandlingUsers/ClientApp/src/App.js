@@ -57,6 +57,7 @@ export default class App extends Component {
 
     addUser(start, count) {
         const data = {
+            key: -1,
             name: '',
             email: '',
             skype: '',
