@@ -1,25 +1,14 @@
-﻿using AgileBoard.Helpers;
-using AgileBoard.Models;
-using AutoMapper;
+﻿using AutoMapper;
 using BusinessLogicLayer.DTOs;
 using BusinessLogicLayer.Infrastructure;
 using BusinessLogicLayer.Interfaces;
 using HandlingUsers.Helpers;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
+using HandlingUsers.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.IO;
-using System.Security.Claims;
-using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AgileBoard.Controllers
+namespace HandlingUsers.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

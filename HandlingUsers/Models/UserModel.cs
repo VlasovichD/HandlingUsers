@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace AgileBoard.Models
+namespace HandlingUsers.Models
 {
     public class UserModel
     {

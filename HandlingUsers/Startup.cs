@@ -1,4 +1,3 @@
-using AgileBoard.Helpers;
 using AutoMapper;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Services;
@@ -8,7 +7,6 @@ using DataAccessLayer.Repositories;
 using HandlingUsers.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
