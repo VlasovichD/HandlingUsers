@@ -1,8 +1,8 @@
-﻿using AgileBoard.Models;
+﻿using HandlingUsers.Models;
 using AutoMapper;
 using BusinessLogicLayer.DTOs;
 
-namespace AgileBoard.Helpers
+namespace HandlingUsers.Helpers
 {
     public class AutoMapperProfile : Profile
     {

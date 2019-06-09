@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace AgileBoard.Helpers
+namespace HandlingUsers.Helpers
 {
     public class AppException : Exception
     {

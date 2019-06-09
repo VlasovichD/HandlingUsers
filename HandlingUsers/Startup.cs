@@ -1,4 +1,3 @@
-using AgileBoard.Helpers;
 using AutoMapper;
 using BusinessLogicLayer.Interfaces;
 using BusinessLogicLayer.Services;
@@ -8,7 +7,6 @@ using DataAccessLayer.Repositories;
 using HandlingUsers.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
@@ -43,9 +41,14 @@ namespace HandlingUsers
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // In production, the React files will be served from this directory
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "ClientApp/build";
+            //});
+
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/build";
+                configuration.RootPath = "clientapp2/build";
             });
         }
 
@@ -81,13 +84,24 @@ namespace HandlingUsers
                     template: "{controller}/{action=Index}/{id?}");
             });
 
+            //app.UseSpa(spa =>
+            //{
+            //    spa.Options.SourcePath = "ClientApp";
+
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseReactDevelopmentServer(npmScript: "start");
+            //    }
+            //});
+
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "ClientApp";
+                spa.Options.SourcePath = "clientapp2";
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseVueDevelopmentServer(npmScript: "serve");
+                    //spa.UseVueCli(npmScript: "serve", port: 8080);
                 }
             });
 
