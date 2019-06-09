@@ -27,7 +27,7 @@ namespace HandlingUsers.Controllers
 
         // POST api/users
         [HttpPost]
-        [ValidateModel]
+        //[ValidateModel]
         public IActionResult Add([FromBody, Bind("Name, Email, Skype, Signature, Avatar")] UserModel user)
         {
             //ValidateModel(user);
@@ -91,7 +91,7 @@ namespace HandlingUsers.Controllers
 
         // PUT api/users/{id}
         [HttpPut("{id}")]
-        [ValidateModel]
+        //[ValidateModel]
         public IActionResult Update(int id, [FromBody, Bind("Name, Email, Skype, Signature, Avatar, Role, Enabled")] UserModel user)
         {
             //ValidateModel(user);
