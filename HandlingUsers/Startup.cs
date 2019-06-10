@@ -32,11 +32,18 @@ namespace HandlingUsers
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("HandlingUsersDatabase")));
 
-            services.AddMvc(options =>
+            services.AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .ConfigureApiBehaviorOptions(options =>
             {
-                options.Filters.Add(typeof(ValidatorActionFilter));
-            })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                //options.SuppressConsumesConstraintForFormFileParameters = true;
+                //options.SuppressInferBindingSourcesForParameters = true;
+                //options.SuppressModelStateInvalidFilter = true;
+                //options.SuppressMapClientErrors = true;
+                options.SuppressUseValidationProblemDetailsForInvalidModelStateResponses = true;
+                //options.ClientErrorMapping[404].Link =
+                //    "https://httpstatuses.com/404";
+            });
 
             services.AddAutoMapper(cfg => cfg.AddProfile(new AutoMapperProfile()));
 
