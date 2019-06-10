@@ -32,7 +32,11 @@ namespace HandlingUsers
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("HandlingUsersDatabase")));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ValidatorActionFilter));
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddAutoMapper(cfg => cfg.AddProfile(new AutoMapperProfile()));
 
@@ -41,14 +45,9 @@ namespace HandlingUsers
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // In production, the React files will be served from this directory
-            //services.AddSpaStaticFiles(configuration =>
-            //{
-            //    configuration.RootPath = "ClientApp/build";
-            //});
-
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "clientapp2/build";
+                configuration.RootPath = "ClientApp/build";
             });
         }
 
@@ -84,24 +83,13 @@ namespace HandlingUsers
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            //app.UseSpa(spa =>
-            //{
-            //    spa.Options.SourcePath = "ClientApp";
-
-            //    if (env.IsDevelopment())
-            //    {
-            //        spa.UseReactDevelopmentServer(npmScript: "start");
-            //    }
-            //});
-
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "clientapp2";
+                spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseVueDevelopmentServer(npmScript: "serve");
-                    //spa.UseVueCli(npmScript: "serve", port: 8080);
+                    spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
 
