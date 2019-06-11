@@ -1,0 +1,28 @@
+<template>
+    <div class="sidebar">
+        <table v-if="users.length" class="list-group table sidebar-list">
+            <tbody>
+                <tr v-for="user in users">
+                    <td>
+                        <img
+                             src="../images/9525.jpg"
+                             class="img"
+                             alt=" " />
+                    </td>
+                    <td v-if="active">
+                        <strong>{{user.name}}</strong>
+                    </td>
+                    <td v-else>
+                        <span>{{user.name}}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p v-else><em>Loading...</em></p>
+    </div>
+</template>
+
+<script src="./userList.ts"></script>
+
+<style src="./userList.css"></style>
