@@ -1,94 +1,52 @@
-import React from 'react';
-
-export class UserRole extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            user: props.user,
-            isUpdated: false,
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleUpdate = this.handleUpdate.bind(this);
-    }
-
-    handleChange(event) {
-        const { name, value } = event.target;
-        const { user } = this.state;
-        this.setState({
-            user: {
-                ...user,
-                [name]: value
-            }
-        });
-    }
-
-    handleUpdate(event) {
-        const { user } = this.state;
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user)
-        };
-
-        return fetch(`/api/Users/${user.id}`, requestOptions);
-    }
-
-    render() {
-        return (
-            <div>
-                <form>
-                    <div className="radio">
-                        <div className="row bg-light">
-                            <div className="col-sm-3">
-                                <input
-                                    type="radio"
-                                    name="role"
-                                    value="User"
-                                    checked={this.state.user.role === 'User'}
-                                    onChange={this.handleChange}
-                                    onBlur={this.handleUpdate}
-                                />
-                                <div>User</div>
-                            </div>
-                            <div className="col-sm-3">
-                                <input
-                                    type="radio"
-                                    name="role"
-                                    value="Manager"
-                                    checked={this.state.user.role === 'Manager'}
-                                    onChange={this.handleChange}
-                                    onBlur={this.handleUpdate}
-                                />
-                                <div>Manager</div>
-                            </div>
-                            <div className="col-sm-3">
-                                <input
-                                    type="radio"
-                                    name="role"
-                                    value="Admin"
-                                    checked={this.state.user.role === 'Admin'}
-                                    onChange={this.handleChange}
-                                    onBlur={this.handleUpdate}
-                                />
-                                <div>Admin</div>
-                            </div>
-                            <div className="col-sm-3">
-                                <input
-                                    type="radio"
-                                    name="role"
-                                    value="Support"
-                                    checked={this.state.user.role === 'Support'}
-                                    onChange={this.handleChange}
-                                    onBlur={this.handleUpdate}
-                                />
-                                <div>Support</div>
-                            </div>
-                        </div>
+<template>
+    <div>
+        <form>
+            <div class="radio">
+                <div class="row bg-light">
+                    <div class="col-sm-3">
+                        <input type="radio"
+                               id="user"
+                               value="User"
+                               v-model="user.role" />
+                        <!--checked={{this.state.user.role ==='User' }}
+                        onchange={this.handleChange}
+                        onblur={this.handleUpdate} />-->
+                        <div>User</div>
                     </div>
-                </form>
+                    <div class="col-sm-3">
+                        <input type="radio"
+                               id="manager"
+                               value="Manager"
+                               v-model="user.role" />
+                        <!--checked={{this.state.user.role ==='Manager' }}
+                        onchange={this.handleChange}
+                        onblur={this.handleUpdate} />-->
+                        <div>Manager</div>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="radio"
+                               id="admin"
+                               value="Admin"
+                               v-model="user.role" />
+                        <!--checked={{this.state.user.role ==='Admin' }}
+                        onchange={this.handleChange}
+                        onblur={this.handleUpdate} />-->
+                        <div>Admin</div>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="radio"
+                               id="support"
+                               value="Support"
+                               v-model="user.role" />
+                        <!-- checked={{this.state.user.role ==='Support' }} -->
+                        <!--onchange={this.handleChange}
+                        onblur={this.handleUpdate}-->
+                        <div>Support</div>
+                    </div>
+                </div>
             </div>
-        );
-    };
-};
+        </form>
+    </div>
+</template>
+
+<script src="./userRole.ts"></script>

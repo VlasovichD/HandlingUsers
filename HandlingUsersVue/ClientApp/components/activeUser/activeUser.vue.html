@@ -1,88 +1,50 @@
-import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import Avatar from 'react-avatar-edit';
-import { UserProfile } from './UserProfile';
-import { UserRole } from './UserRole';
-import { UserSettings } from './UserSettings';
-import './ActiveUser.css';
-
-export default ({ data, update, active, onCrop, onClose, onBeforeFileLoad }) => {
-
-    //const user = data.users[active];
-    const userAvatar = data.users.map((user, index) => {
-        return (<div>
-            <Avatar
-                width={150}
-                height={200}
-                onCrop={onCrop}
-                onClose={onClose}
-                onBeforeFileLoad={onBeforeFileLoad}
-                src={user.avatar}
-                label={"User image"}
-                user={user}
-                index={index}
-                key={user.id}
-                update={update}
-            />
-            {data.preview === null ? [] : <img
-                src={data.preview}
-                alt="Preview"
-            />}
-        </div>);
-    });
-
-    const userProfile = data.users.map((user, index) => {
-        return (<UserProfile
-            user={user}
-            index={index}
-            key={user.id}
-            update={update}
-        />);
-    });
-
-    const userRole = data.users.map((user, index) => {
-        return (<UserRole
-            user={user}
-            index={index}
-            key={user.id}
-            update={update}
-        />);
-    });
-
-    const userSettings = data.users.map((user, index) => {
-        return (<UserSettings
-            user={user}
-            index={index}
-            key={user.id}
-            update={update}
-        />);
-    });
-
-    return (
-        <div className="thumbnail">
-            <Tabs>
-                <TabList className="nav justify-content-center bg-secondary">
-                    <Tab className="nav-item nav-link">Profile</Tab>
-                    <Tab className="nav-item nav-link">User role</Tab>
-                    <Tab className="nav-item nav-link">Settings</Tab>
-                </TabList>
-                <div className="row mt-3">
-                    <div className="col-sm-4">
-                        {userAvatar[active]}
+<template>
+    <div>
+        <nav>
+            <div class="nav nav-tabs justify-content-center bg-secondary" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">Profile</a>
+                <a class="nav-item nav-link" id="nav-role-tab" data-toggle="tab" href="#nav-role" role="tab" aria-controls="nav-role" aria-selected="false">User role</a>
+                <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false">Settings</a>
+            </div>
+        </nav>
+        <div class="row mt-3">
+            <div class="col-sm-4">
+                <div v-if="!user.avatar" v-model="user" @onclick="clickMethod">
+                    <img :height="150"
+                         :width="150"
+                         src="../images/noImage.jpg"
+                         @onclick="$refs.file.click()" />
+                </div>
+                <div v-else v-model="user">
+                    <avatar username="user.name" size="150" :rounded="false" :src="user.avatar"></avatar>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <user-profile-component user={user}
+                                                index={index}
+                                                key={user.id}
+                                                update={update} />
                     </div>
-                    <div className="col-sm-8">
-                        <TabPanel>
-                            {userProfile[active]}
-                        </TabPanel>
-                        <TabPanel>
-                            {userRole[active]}
-                        </TabPanel>
-                        <TabPanel>
-                            {userSettings[active]}
-                        </TabPanel>
+                    <div class="tab-pane fade" id="nav-role" role="tabpanel" aria-labelledby="nav-role-tab">
+                        <user-role-component user={user}
+                                             index={index}
+                                             key={user.id}
+                                             update={update} />
+                    </div>
+                    <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
+                        <user-settings-component user={user}
+                                                 index={index}
+                                                 key={user.id}
+                                                 update={update} />
                     </div>
                 </div>
-            </Tabs>
+            </div>
         </div>
-    );
-};
+    </div>
+</template>
+
+<script src="./activeUser.ts"></script>
+
+<style src="./activeUser.css"></style>

@@ -1,5 +1,35 @@
-//import React from 'react';
-//import './UserSettings.css';
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
+import ActiveUserComponent from '../activeUser/activeUser';
+import './userSettings.css';
+
+interface User {
+    name: string;
+    email: string;
+    skype: string;
+    signature: string;
+    avatar: any;
+    role: string;
+    enabled: boolean;
+}
+
+@Component
+export default class UserSettingsComponent extends Vue {
+    user: User = {
+        name: 'Alex',
+        email: 'Aadsas',
+        skype: 'sdf',
+        signature: 'saf',
+        avatar: '',
+        role: 'Admin',
+        enabled: true
+    };
+
+    mounted() {
+        this.user = ActiveUserComponent.arguments;
+    }
+}
+
 
 //export class UserSettings extends React.Component {
 //    constructor(props) {

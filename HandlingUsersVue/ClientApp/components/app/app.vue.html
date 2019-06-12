@@ -1,5 +1,5 @@
 <template>
-    <div id='app-root' class="container-fluid">
+    <div id='app-root' class="container">
         <div class="row bg-light">
             <div class="col-sm-3">
                 <div class="input-group mb-3">
@@ -9,31 +9,27 @@
                     </button>
                 </div>
                 <div>
-                    <search-plugin-component
-                                  term={this.state.term}
-                                  data={this.state.initData}
-                                  update={this.updateData.bind(this)} />
+                    <search-plugin-component term={this.state.term}
+                                             data={this.state.initData}
+                                             update={this.updateData.bind(this)} />
                 </div>
                 <div>
-                    <switch-menu-component
-                                data={this.state}
-                                update={this.reloadData.bind(this)}
-                                enabled={this.state.enabled} />
+                    <switch-menu-component data={this.state}
+                                           update={this.reloadData.bind(this)}
+                                           enabled={this.state.enabled} />
                 </div>
-                <div class="sidebar" onScroll={event =>
-                    this.onScrollList(event)}>
+                <div class="sidebar" @onscroll="onScrollEvent">
                     <user-list-component data={this.state}
-                              update={this.updateData.bind(this)} />
+                                         update={this.updateData.bind(this)} />
                 </div>
             </div>
             <div class="col-sm-9">
                 <active-user-component data={this.state}
-                            update={this.updateData.bind(this)}
-                            active={this.state.active}
-                            onCrop={this.onCrop}
-                            onClose={this.onClose}
-                            onBeforeFileLoad={this.onBeforeFileLoad} />
-                <fetch-data-component></fetch-data-component>
+                                       update={this.updateData.bind(this)}
+                                       active={this.state.active}
+                                       onCrop={this.onCrop}
+                                       onClose={this.onClose}
+                                       onBeforeFileLoad={this.onBeforeFileLoad} />
             </div>
         </div>
     </div>
