@@ -1,4 +1,14 @@
-//import React from 'react';
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
+
+@Component
+export default class SearchPluginComponent extends Vue {
+    enabled: boolean = true;
+
+    handleEnabled() { this.enabled = true; };
+    handleDisabled() { this.enabled = false; };
+}
+
 
 //export default ({ term, data, update }) => {
 

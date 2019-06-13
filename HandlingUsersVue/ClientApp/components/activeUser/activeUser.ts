@@ -39,7 +39,7 @@ export default class ActiveUserComponent extends Vue {
     };
 
     clickMethod() {
-        this.$refs.file.click();
+        
     };
 
 

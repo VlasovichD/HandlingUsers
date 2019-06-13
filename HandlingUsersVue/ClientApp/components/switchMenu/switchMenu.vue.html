@@ -1,19 +1,20 @@
-import React from 'react';
-//import './SwitchMenu.css';
+<template>
+    <div>
+        <div class="btn-group d-flex">
 
-export default ({data, update, enabled }) => {
+            <button class="btn btn-light" @click="handleEnabled">
+                <strong v-show="enabled">Enabled</strong>
+                <span v-show="!enabled">Enabled</span>
+            </button>
+      
+            <button class="btn btn-light" @click="handleDisabled">
+                <strong v-show="!enabled">Disabled</strong>
+                <span v-show="enabled">Disabled</span>
+            </button>
 
-    return (
-        <div>
-            <nav className="nav nav nav-fill">
-                <span> <button type="button" className="btn btn-light"
-                    onClick={() => update({ enabled: true })}
-                >{enabled ? <strong>Enabled</strong> : <span>Enabled</span>}</button> </span>
-                <span> <button type="button" className="btn btn-light"
-                    onClick={() => update({ enabled: false })}
-                >{enabled ? <span>Disabled</span> : <strong>Disabled</strong>}</button> </span>
-            </nav>
         </div>
-    );
-};
+    </div>
+</template>
+
+<script src="./switchMenu.ts"></script>
 

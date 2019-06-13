@@ -1,34 +1,14 @@
-import React from 'react';
-
-export default ({ term, data, update }) => {
-
-    const dataSearch = e => {
-        const value = e.target.value.toLowerCase();
-
-        const filter = data.filter(user => {
-            return user.name.toLowerCase().includes(value);
-        });
-
-        update({
-            users: filter,
-            active: 0,
-            term: value
-        });
-
-    };
-
-    return (
-        <div className="input-group mb-3">
-            <div className="input-group-prepend">
-                <span className="input-group-text" role="img" aria-label="Search" aria-describedby="basic-addon1">&#128269;</span>
-            </div>
-            <input
-                value={term}
-                type="text"
-                className="form-control"
-                placeholder="Search"
-                onChange={dataSearch}
-            />
+<template>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" role="img" aria-label="Search" aria-describedby="basic-addon1">&#128269;</span>
         </div>
-    );
-};
+        <input value={term}
+               type="text"
+               class="form-control"
+               placeholder="Search"
+               @hange={dataSearch} />
+    </div>
+</template>
+
+<script src="./searchPlugin.ts"></script>

@@ -2,7 +2,7 @@
     <div class="sidebar">
         <table v-if="users.length" class="list-group table sidebar-list">
             <tbody>
-                <tr v-for="user in users">
+                <tr v-for="user in users" :key="user.id">
                     <td>
                         <img
                              src="../images/9525.jpg"
