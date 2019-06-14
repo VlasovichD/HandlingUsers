@@ -12,8 +12,11 @@ interface User {
     enabled: boolean;
 }
 
-@Component
+@Component({
+    props: ['user']
+})
 export default class UserProfileComponent extends Vue {
+   
     user: User = {
         name: 'Alex',
         email: 'Aadsas',
@@ -24,8 +27,10 @@ export default class UserProfileComponent extends Vue {
         enabled: true
     };
 
-    mounted() {
-        this.user = ActiveUserComponent.arguments;
+    //user: User = this.$props.user;
+
+    mounted(user) {
+        this.user = this.$props['user'];
     }
 }
 

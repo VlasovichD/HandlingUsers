@@ -1,15 +1,15 @@
 <template>
-    <div class="sidebar">
+    <div class="sidebar" @scroll.prevent="onScrollEvent">
         <table v-if="users.length" class="list-group table sidebar-list">
             <tbody>
-                <tr v-for="user in users" :key="user.id">
+                <tr v-for="(user, index) in users" :key="user.id" @click="setActive(index)">
                     <td>
                         <img
                              src="../images/9525.jpg"
                              class="img"
                              alt=" " />
                     </td>
-                    <td v-if="active">
+                    <td v-if="index == active">
                         <strong>{{user.name}}</strong>
                     </td>
                     <td v-else>

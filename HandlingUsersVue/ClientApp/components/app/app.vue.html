@@ -9,27 +9,19 @@
                     </button>
                 </div>
                 <div>
-                    <search-plugin-component term={this.state.term}
-                                             data={this.state.initData}
-                                             update={this.updateData.bind(this)} />
+                    <search-plugin-component />
                 </div>
                 <div>
-                    <switch-menu-component data={this.state}
-                                           update={this.reloadData.bind(this)}
-                                           enabled={this.state.enabled} />
+                    <switch-menu-component />
                 </div>
-                <div class="sidebar" @onscroll="onScrollEvent">
-                    <user-list-component data={this.state}
-                                         update={this.updateData.bind(this)} />
+                <div>
+                    <user-list-component/>
                 </div>
             </div>
             <div class="col-sm-9">
-                <active-user-component data={this.state}
-                                       update={this.updateData.bind(this)}
-                                       active={this.state.active}
-                                       onCrop={this.onCrop}
-                                       onClose={this.onClose}
-                                       onBeforeFileLoad={this.onBeforeFileLoad} />
+                <active-user-component/>
+                                       <!--:user="user" @setActive="showActiveUser(user)" />-->
+                                       
             </div>
         </div>
     </div>
