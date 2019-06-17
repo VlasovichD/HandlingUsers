@@ -1,12 +1,11 @@
 <template>
     <div>
-        <span v-if="user.enabled">Enable</span>
-        <span v-else>Disable</span>
+        <span v-if="user.enabled">Disable</span>
+        <span v-else>Enable</span>
         <label class="switch">
             <input type="checkbox"
-                   checked={this.state.user.enabled}
-                   onChange={this.handleChange}
-                   onBlur={this.handleUpdate} />
+                   v-model="user.enabled"
+                   @change="handleUpdate" />
             <span class="slider round"></span>
         </label>
     </div>

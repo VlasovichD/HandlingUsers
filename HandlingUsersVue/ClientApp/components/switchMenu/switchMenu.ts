@@ -1,11 +1,12 @@
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class SwitchMenuComponent extends Vue {
-    enabled: boolean = true;
+    @Prop() enabled!: boolean;
     
-    handleEnabled() { this.enabled = true; };
-    handleDisabled() { this.enabled = false; };
+    handleEnabled(enabled) {
+        this.$emit('switch', enabled);
+    };
 }
 

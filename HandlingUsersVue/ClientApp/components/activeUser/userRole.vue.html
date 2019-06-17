@@ -7,40 +7,32 @@
                         <input type="radio"
                                id="user"
                                value="User"
-                               v-model="user.role" />
-                        <!--checked={{this.state.user.role ==='User' }}
-                        onchange={this.handleChange}
-                        onblur={this.handleUpdate} />-->
+                               v-model="user.role"
+                               @change="handleUpdate" />
                         <div>User</div>
                     </div>
                     <div class="col-sm-3">
                         <input type="radio"
                                id="manager"
                                value="Manager"
-                               v-model="user.role" />
-                        <!--checked={{this.state.user.role ==='Manager' }}
-                        onchange={this.handleChange}
-                        onblur={this.handleUpdate} />-->
+                               v-model="user.role"
+                               @change="handleUpdate" />
                         <div>Manager</div>
                     </div>
                     <div class="col-sm-3">
                         <input type="radio"
                                id="admin"
                                value="Admin"
-                               v-model="user.role" />
-                        <!--checked={{this.state.user.role ==='Admin' }}
-                        onchange={this.handleChange}
-                        onblur={this.handleUpdate} />-->
+                               v-model="user.role"
+                               @change="handleUpdate" />
                         <div>Admin</div>
                     </div>
                     <div class="col-sm-3">
                         <input type="radio"
                                id="support"
                                value="Support"
-                               v-model="user.role" />
-                        <!-- checked={{this.state.user.role ==='Support' }} -->
-                        <!--onchange={this.handleChange}
-                        onblur={this.handleUpdate}-->
+                               v-model="user.role"
+                               @change="handleUpdate" />
                         <div>Support</div>
                     </div>
                 </div>

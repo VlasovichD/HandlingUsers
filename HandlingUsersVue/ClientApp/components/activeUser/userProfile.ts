@@ -1,6 +1,5 @@
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
-import ActiveUserComponent from '../activeUser/activeUser';
+import { Component, Prop } from 'vue-property-decorator';
 
 interface User {
     name: string;
@@ -12,25 +11,40 @@ interface User {
     enabled: boolean;
 }
 
-@Component({
-    props: ['user']
-})
+@Component
 export default class UserProfileComponent extends Vue {
-   
-    user: User = {
-        name: 'Alex',
-        email: 'Aadsas',
-        skype: 'sdf',
-        signature: 'saf',
-        avatar: '',
-        role: 'Admin',
-        enabled: true
-    };
+    @Prop() user!: User
 
-    //user: User = this.$props.user;
+    errors: string[] = [];
 
-    mounted(user) {
-        this.user = this.$props['user'];
+    validName(name) {
+        var re = /^[A-Za-z\s]+$/;
+        return re.test(name);
+    }
+
+    validEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+    handleUpdate() {
+        this.errors = [];
+
+        if (!this.user.name) {
+            this.errors.push('Name is empty');
+        } else if (!this.validName(this.user.name)) {
+            this.errors.push('Name is incorrect');
+        }
+
+        if (!this.user.email) {
+            this.errors.push('Email is empty');
+        } else if (!this.validEmail(this.user.email)) {
+            this.errors.push('Email is incorrect');
+        }
+
+        if (!this.errors.length) {
+            this.$emit('updateUser');
+        }
     }
 }
 

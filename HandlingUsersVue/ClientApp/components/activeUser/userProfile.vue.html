@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name</span>
@@ -9,8 +10,7 @@
                    class="form-control"
                    name="name"
                    placeholder="Firstname Lastname"
-                   onChange={this.handleChange}
-                   onBlur={this.handleUpdate}
+                   @blur="handleUpdate"
                    required />
         </div>
         <div class="input-group mb-3">
@@ -18,13 +18,11 @@
                 <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email</span>
             </div>
             <input v-model="user.email"
-                   type="text"
+                   type="email"
                    class="form-control"
                    name="email"
-                   value={this.state.user.email}
                    placeholder="example@mail.com"
-                   onChange={this.handleChange}
-                   onBlur={this.handleUpdate}
+                   @blur="handleUpdate"
                    required />
         </div>
         <div class="input-group mb-3">
@@ -37,10 +35,8 @@
                    type="text"
                    class="form-control"
                    name="skype"
-                   value={this.state.user.skype}
                    placeholder="live: skype"
-                   onChange={this.handleChange}
-                   onBlur={this.handleUpdate} />
+                   @blur="handleUpdate" />
         </div>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -50,10 +46,14 @@
                    type="text"
                    class="form-control"
                    name="signature"
-                   value={this.state.user.signature}
                    placeholder="Write your signature here..."
-                   onChange={this.handleChange}
-                   onBlur={this.handleUpdate} />
+                   @blur="handleUpdate" />
+        </div>
+        <div v-show="errors.length">
+            <b>Please fix this errors:</b>
+            <ul>
+                <li v-for="error in errors">{{ error }}</li>
+            </ul>
         </div>
     </div>
 </template>

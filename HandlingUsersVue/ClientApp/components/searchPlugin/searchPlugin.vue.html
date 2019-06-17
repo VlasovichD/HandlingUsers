@@ -3,11 +3,11 @@
         <div class="input-group-prepend">
             <span class="input-group-text" role="img" aria-label="Search" aria-describedby="basic-addon1">&#128269;</span>
         </div>
-        <input value={term}
+        <input :value="searchText"
                type="text"
                class="form-control"
                placeholder="Search"
-               @hange={dataSearch} />
+               @input="handleUpdate"/>
     </div>
 </template>
 

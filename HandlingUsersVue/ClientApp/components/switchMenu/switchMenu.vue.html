@@ -1,17 +1,14 @@
 <template>
     <div>
         <div class="btn-group d-flex">
-
-            <button class="btn btn-light" @click="handleEnabled">
+            <button class="btn btn-light" @click="handleEnabled(true)">
                 <strong v-show="enabled">Enabled</strong>
                 <span v-show="!enabled">Enabled</span>
             </button>
-      
-            <button class="btn btn-light" @click="handleDisabled">
+            <button class="btn btn-light" @click="handleEnabled(false)">
                 <strong v-show="!enabled">Disabled</strong>
                 <span v-show="enabled">Disabled</span>
             </button>
-
         </div>
     </div>
 </template>

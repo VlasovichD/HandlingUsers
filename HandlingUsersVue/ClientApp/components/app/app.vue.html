@@ -3,25 +3,22 @@
         <div class="row bg-light">
             <div class="col-sm-3">
                 <div class="input-group mb-3">
-                    <button class="btn btn-outline-secondary btn-block text-center"
-                            onClick={this.addUser.bind(this)}>
+                    <button class="btn btn-outline-secondary btn-block text-center" @click="addUser">
                         Add user
                     </button>
                 </div>
                 <div>
-                    <search-plugin-component />
+                    <search-plugin-component :searchText="searchText" @filterText="filterText"/>
                 </div>
                 <div>
-                    <switch-menu-component />
+                    <switch-menu-component :enabled="enabled" @switch="switchList" />
                 </div>
                 <div>
-                    <user-list-component/>
+                    <user-list-component :users="users|filterUsers(searchText)" :active="active" :isLoading="isLoading" @setActiveUser="setActive" @addMoreData="addMoreData" />
                 </div>
             </div>
             <div class="col-sm-9">
-                <active-user-component/>
-                                       <!--:user="user" @setActive="showActiveUser(user)" />-->
-                                       
+                <active-user-component :user="users|filterUsers(searchText)[active]" @updateUser="updateUserData" />
             </div>
         </div>
     </div>

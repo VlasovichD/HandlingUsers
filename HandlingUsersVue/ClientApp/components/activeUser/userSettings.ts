@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 import ActiveUserComponent from '../activeUser/activeUser';
 import './userSettings.css';
 
@@ -15,18 +15,11 @@ interface User {
 
 @Component
 export default class UserSettingsComponent extends Vue {
-    user: User = {
-        name: 'Alex',
-        email: 'Aadsas',
-        skype: 'sdf',
-        signature: 'saf',
-        avatar: '',
-        role: 'Admin',
-        enabled: true
-    };
+    @Prop() user!: User
 
-    mounted() {
-        this.user = ActiveUserComponent.arguments;
+    handleUpdate() {
+        console.log(this.user.enabled);
+        this.$emit('updateUser');
     }
 }
 

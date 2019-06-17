@@ -1,11 +1,10 @@
 <template>
-    <div class="sidebar" @scroll.prevent="onScrollEvent">
-        <table v-if="users.length" class="list-group table sidebar-list">
+    <div class="sidebar">
+        <table v-if="users.length" class="list-group table sidebar-list" @scroll="handleScroll">
             <tbody>
                 <tr v-for="(user, index) in users" :key="user.id" @click="setActive(index)">
                     <td>
-                        <img
-                             src="../images/9525.jpg"
+                        <img src="../images/9525.jpg"
                              class="img"
                              alt=" " />
                     </td>
@@ -18,8 +17,8 @@
                 </tr>
             </tbody>
         </table>
-
-        <p v-else><em>Loading...</em></p>
+        <p v-else-if="isLoading"><em>Loading...</em></p>
+        <p v-else><em>List is empty</em></p>
     </div>
 </template>
 

@@ -1,13 +1,7 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import Avatar from 'vue-avatar';
-//import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-//import Avatar from 'react-avatar-edit';
-//import { UserProfile } from './UserProfile';
-//import { UserRole } from './UserRole';
-//import { UserSettings } from './UserSettings';
 import './activeUser.css';
-import UserListComponent from '../userList/userList';
 
 interface User {
     name: string;
@@ -28,24 +22,13 @@ interface User {
     }
 })
 export default class ActiveUserComponent extends Vue {
-    //@Prop() readonly user: any
+    @Prop() user!: User
+    
+    addAvatar() {
 
-    user: User = {
-        name: 'Alex Lynn',
-        email: 'Aadsas',
-        skype: 'sdf',
-        signature: 'saf',
-        avatar: '',
-        role: 'Admin',
-        enabled: true
-    };
+    }
 
-    //showActiveUser(user) {
-    //    this.user = user;
-    //};
-
-
-    //mounted() {
-    //    this.user = UserListComponent.arguments.users[1];
-    //}
+    updateUser() {
+        this.$emit('updateUser');
+    } 
 }

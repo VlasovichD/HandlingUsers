@@ -1,12 +1,14 @@
 import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
+import { Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class SearchPluginComponent extends Vue {
-    enabled: boolean = true;
+    @Prop() searchText!: string
 
-    handleEnabled() { this.enabled = true; };
-    handleDisabled() { this.enabled = false; };
+    handleUpdate(event) {
+        this.$emit('filterText', event.target.value);
+        console.log(event.target.value);
+    }
 }
 
 
