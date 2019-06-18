@@ -57,7 +57,7 @@ namespace BusinessLogicLayer.Services
             {
                 users = _database.Users.Find(u => u.Enabled == enabled).Skip(start).Take(count);
             }
-            
+
 
             if (users == null)
                 throw new ValidationException("List of users is empty");
@@ -109,6 +109,19 @@ namespace BusinessLogicLayer.Services
 
             if (userParam.Enabled != user.Enabled)
                 user.Enabled = userParam.Enabled;
+
+            _database.Save();
+        }
+
+        public void UpdateAvatar(UserDTO userParam)
+        {
+            var user = _database.Users.GetById(userParam.Id);
+
+            if (user == null)
+                throw new ValidationException("User not found");
+
+            if (userParam.Avatar != null && userParam.Avatar != user.Avatar)
+                user.Avatar = userParam.Avatar;
 
             _database.Save();
         }

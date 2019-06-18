@@ -4,9 +4,8 @@
             <tbody>
                 <tr v-for="(user, index) in users" :key="user.id" @click="setActive(index)">
                     <td>
-                        <img src="../images/9525.jpg"
-                             class="img"
-                             alt=" " />
+                        <avatar v-if="user.avatar" :size="30" :src="'data:image/jpeg;base64,' + user.avatar"></avatar>
+                        <avatar v-else :username="user.name" :size="30"></avatar>
                     </td>
                     <td v-if="index == active">
                         <strong>{{user.name}}</strong>

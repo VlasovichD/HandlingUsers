@@ -9,6 +9,7 @@ namespace BusinessLogicLayer.Interfaces
         IEnumerable<UserDTO> Get(int start, int count, bool enabled, string searchName);
         UserDTO GetById(int userId);
         void Update(UserDTO userDTO);
+        void UpdateAvatar(UserDTO userDTO);
         void Delete(int userId);
     }
 }

@@ -4,8 +4,11 @@ using BusinessLogicLayer.Infrastructure;
 using BusinessLogicLayer.Interfaces;
 using HandlingUsersVue.Helpers;
 using HandlingUsersVue.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace HandlingUsersVue.Controllers
@@ -37,6 +40,12 @@ namespace HandlingUsersVue.Controllers
             try
             {
                 var userDTO = _mapper.Map<UserDTO>(user);
+
+                //using (var memoryStream = new MemoryStream())
+                //{
+                //    user.Avatar.CopyTo(memoryStream);
+                //    userDTO.Avatar = memoryStream.ToArray();
+                //}
 
                 // add user role by default
                 userDTO.Role = RoleType.User.ToString();
@@ -103,6 +112,12 @@ namespace HandlingUsersVue.Controllers
                 var userDTO = _mapper.Map<UserDTO>(user);
                 userDTO.Id = id;
 
+                //using (var memoryStream = new MemoryStream())
+                //{
+                //    user.Avatar.CopyTo(memoryStream);
+                //    userDTO.Avatar = memoryStream.ToArray();
+                //}
+
                 // save
                 _userService.Update(userDTO);
 
@@ -114,7 +129,36 @@ namespace HandlingUsersVue.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
-               
+
+        // POST api/users/{id}/avatar
+        [HttpPost("{id}/avatar")]
+        [DisableFormValueModelBinding]
+        public IActionResult UpdateAvtar(int id, [FromForm] IFormFile avatar)
+        {
+            try
+            {
+                // map model to dto and set id
+                var userDTO = new UserDTO();
+                userDTO.Id = id;
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    avatar.CopyTo(memoryStream);
+                    userDTO.Avatar = memoryStream.ToArray();
+                }
+
+                // save
+                _userService.UpdateAvatar(userDTO);
+
+                return Ok();
+            }
+            catch (ValidationException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         // DELETE api/users/{id}
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

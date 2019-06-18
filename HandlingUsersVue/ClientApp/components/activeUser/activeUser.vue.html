@@ -9,14 +9,17 @@
         </nav>
         <div class="row mt-3">
             <div class="col-sm-4">
-                <div v-if="!user.avatar" v-model="user" @click="addAvatar">
+                <div v-if="!user.avatar" v-model="user.avatar">
+                    <input type="file" ref="file" style="display: none" @change="addAvatar">
                     <img :height="150"
                          :width="150"
                          src="../images/noImage.jpg"
-                         @onclick="$refs.file.click()" />
+                         @click="$refs.file.click()" />
                 </div>
-                <div v-else v-model="user">
-                    <avatar username="user.name" size="150" :rounded="false" :src="user.avatar"></avatar>
+                <div v-else v-model="user.avatar">
+                    <avatar :size="150"
+                            :rounded="false"
+                            :src="'data:image/jpeg;base64,' + user.avatar"></avatar>
                 </div>
             </div>
             <div class="col-sm-8">

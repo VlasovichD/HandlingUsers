@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
+import axios from 'axios';
 
 interface User {
     id: number;
@@ -7,7 +8,7 @@ interface User {
     email: string;
     skype: string;
     signature: string;
-    avatar: any;
+    avatar: FormData;
     role: string;
     enabled: boolean;
 }
@@ -47,7 +48,7 @@ export default class AppComponent extends Vue {
             email: '',
             skype: '',
             signature: '',
-            avatar: '',
+            avatar: new FormData,
             role: 'User',
             enabled: true
         }
@@ -69,6 +70,20 @@ export default class AppComponent extends Vue {
 
     setActive(index) {
         this.active = index;
+    }
+
+    addAvatar(file) {
+        let user = this.users[this.active];
+        const fd = new FormData();
+
+        fd.append('avatar', file, file.name);
+
+//        this.users[this.active].avatar = file;
+
+        axios.post(`/api/Users/${user.id}/avatar`, fd)
+            .then(response => {
+                console.log(response);
+            })
     }
 
     updateUserData() {

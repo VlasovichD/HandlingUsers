@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
+import Avatar from 'vue-avatar';
 import './userList.css';
 
 interface User {
@@ -12,7 +13,11 @@ interface User {
     enabled: boolean;
 }
 
-@Component
+@Component({
+    components: {
+        Avatar
+    }
+})
 export default class UserListComponent extends Vue {
     @Prop() users!: User[]
     @Prop() active!: number

@@ -8,7 +8,7 @@
                     </button>
                 </div>
                 <div>
-                    <search-plugin-component :searchText="searchText" @filterText="filterText"/>
+                    <search-plugin-component :searchText="searchText" @filterText="filterText" />
                 </div>
                 <div>
                     <switch-menu-component :enabled="enabled" @switch="switchList" />
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="col-sm-9">
-                <active-user-component :user="users|filterUsers(searchText)[active]" @updateUser="updateUserData" />
+                <active-user-component :user="users|filterUsers(searchText)[active]" @updateUser="updateUserData" @addAvatar="addAvatar" />
             </div>
         </div>
     </div>
