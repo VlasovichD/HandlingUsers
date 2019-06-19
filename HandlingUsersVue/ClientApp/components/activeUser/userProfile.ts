@@ -1,15 +1,6 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
-
-interface User {
-    name: string;
-    email: string;
-    skype: string;
-    signature: string;
-    avatar: any;
-    role: string;
-    enabled: boolean;
-}
+import { User } from '../interfaces/user';
 
 @Component
 export default class UserProfileComponent extends Vue {

@@ -1,17 +1,8 @@
 import Vue from 'vue';
 import { Component, Prop } from 'vue-property-decorator';
 import Avatar from 'vue-avatar';
+import { User } from '../interfaces/user';
 import './activeUser.css';
-
-interface User {
-    name: string;
-    email: string;
-    skype: string;
-    signature: string;
-    avatar: [];
-    role: string;
-    enabled: boolean;
-}
 
 @Component({
     components: {

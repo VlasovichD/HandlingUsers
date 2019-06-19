@@ -41,12 +41,6 @@ namespace HandlingUsersVue.Controllers
             {
                 var userDTO = _mapper.Map<UserDTO>(user);
 
-                //using (var memoryStream = new MemoryStream())
-                //{
-                //    user.Avatar.CopyTo(memoryStream);
-                //    userDTO.Avatar = memoryStream.ToArray();
-                //}
-
                 // add user role by default
                 userDTO.Role = RoleType.User.ToString();
                 // make user enabled by default
@@ -112,12 +106,6 @@ namespace HandlingUsersVue.Controllers
                 var userDTO = _mapper.Map<UserDTO>(user);
                 userDTO.Id = id;
 
-                //using (var memoryStream = new MemoryStream())
-                //{
-                //    user.Avatar.CopyTo(memoryStream);
-                //    userDTO.Avatar = memoryStream.ToArray();
-                //}
-
                 // save
                 _userService.Update(userDTO);
 
@@ -150,7 +138,7 @@ namespace HandlingUsersVue.Controllers
                 // save
                 _userService.UpdateAvatar(userDTO);
 
-                return Ok();
+                return Ok(userDTO.Avatar);
             }
             catch (ValidationException ex)
             {
