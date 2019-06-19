@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace HandlingUsersVue.Models
+﻿namespace HandlingUsersVue.Models
 {
     public class UserModel
     {

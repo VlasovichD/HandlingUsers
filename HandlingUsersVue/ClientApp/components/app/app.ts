@@ -68,8 +68,6 @@ export default class AppComponent extends Vue {
 
         fd.append('avatar', file, file.name);
 
-//        this.users[this.active].avatar = file;
-
         axios.post(`/api/Users/${user.id}/avatar`, fd)
             .then(response => {
                 this.users[this.active].avatar = response.data;

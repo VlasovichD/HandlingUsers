@@ -1,9 +1,6 @@
-﻿using HandlingUsersVue.Models;
-using AutoMapper;
+﻿using AutoMapper;
 using BusinessLogicLayer.DTOs;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using Microsoft.AspNetCore.Http.Internal;
+using HandlingUsersVue.Models;
 
 namespace HandlingUsersVue.Helpers
 {

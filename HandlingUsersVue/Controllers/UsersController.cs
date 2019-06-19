@@ -5,7 +5,6 @@ using BusinessLogicLayer.Interfaces;
 using HandlingUsersVue.Helpers;
 using HandlingUsersVue.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.IO;
