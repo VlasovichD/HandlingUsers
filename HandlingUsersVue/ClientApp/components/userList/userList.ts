@@ -20,7 +20,7 @@ export default class UserListComponent extends Vue {
 
     handleScroll(event) {
         const scrollBottom = event.target.scrollTop +
-            event.target.offsetHeight >= event.target.scrollHeight;
+            event.target.offsetHeight === event.target.scrollHeight;
 
         if (scrollBottom) {
             this.$emit('addMoreData');

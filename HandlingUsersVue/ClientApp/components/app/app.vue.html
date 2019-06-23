@@ -1,7 +1,7 @@
 <template>
     <div id='app-root' class="container" style="padding-top:20px">
         <div class="row bg-light">
-            <div class="col-sm-3">
+            <div class="col-md-auto">
                 <div class="input-group mb-3">
                     <button class="btn btn-outline-secondary btn-block text-center" @click="addUser">
                         Add user
@@ -17,7 +17,7 @@
                     <user-list-component :users="users|filterUsers(searchText)" :active="active" :isLoading="isLoading" @setActiveUser="setActive" @addMoreData="addMoreData" />
                 </div>
             </div>
-            <div class="col-sm-9">
+            <div class="col-md">
                 <active-user-component :user="users|filterUsers(searchText)[active]" @updateUser="updateUserData" @addAvatar="addAvatar" />
             </div>
         </div>

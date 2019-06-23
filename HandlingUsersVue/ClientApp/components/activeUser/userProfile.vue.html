@@ -1,53 +1,54 @@
 <template>
-    <div>
-
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name</span>
+    <form>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input v-model="user.name"
+                       type="text"
+                       class="form-control"
+                       id="name"
+                       name="name"
+                       placeholder="Firstname Lastname"
+                       @blur="handleUpdate"
+                       required/>
             </div>
-            <input v-model="user.name"
-                   type="text"
-                   class="form-control"
-                   name="name"
-                   placeholder="Firstname Lastname"
-                   @blur="handleUpdate"
-                   required />
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email</span>
+        <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+                <input v-model="user.email"
+                       type="email"
+                       class="form-control"
+                       id="email"
+                       name="email"
+                       placeholder="example@mail.com"
+                       @blur="handleUpdate" 
+                       required/>
             </div>
-            <input v-model="user.email"
-                   type="email"
-                   class="form-control"
-                   name="email"
-                   placeholder="example@mail.com"
-                   @blur="handleUpdate"
-                   required />
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Skype
-                </span>
+        <div class="form-group row">
+            <label for="skype" class="col-sm-2 col-form-label">Skype</label>
+            <div class="col-sm-10">
+                <input v-model="user.skype"
+                       type="text"
+                       class="form-control"
+                       id="skype"
+                       name="skype"
+                       placeholder="live: skype"
+                       @blur="handleUpdate" />
             </div>
-            <input v-model="user.skype"
-                   type="text"
-                   class="form-control"
-                   name="skype"
-                   placeholder="live: skype"
-                   @blur="handleUpdate" />
         </div>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Signature</span>
+        <div class="form-group row">
+            <label for="signature" class="col-sm-2 col-form-label">Signature</label>
+            <div class="col-sm-10">
+                <input v-model="user.signature"
+                       type="text"
+                       class="form-control"
+                       id="signature"
+                       name="signature"
+                       placeholder="Write your signature here..."
+                       @blur="handleUpdate" />
             </div>
-            <input v-model="user.signature"
-                   type="text"
-                   class="form-control"
-                   name="signature"
-                   placeholder="Write your signature here..."
-                   @blur="handleUpdate" />
         </div>
         <div v-show="errors.length">
             <b>Please fix this errors:</b>
@@ -55,7 +56,7 @@
                 <li v-for="error in errors">{{ error }}</li>
             </ul>
         </div>
-    </div>
+    </form>
 </template>
 
 <script src="./userProfile.ts"></script>
