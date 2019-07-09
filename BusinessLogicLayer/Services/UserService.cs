@@ -51,7 +51,7 @@ namespace BusinessLogicLayer.Services
 
             if (!string.IsNullOrEmpty(searchName))
             {
-                users = _database.Users.Find(u => u.Enabled == enabled && u.Name == searchName).Skip(start).Take(count);
+                users = _database.Users.Find(u => u.Enabled == enabled && u.Name.Contains(searchName, StringComparison.OrdinalIgnoreCase)).Skip(start).Take(count);
             }
             else
             {
