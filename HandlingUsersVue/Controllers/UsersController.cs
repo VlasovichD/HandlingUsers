@@ -31,10 +31,10 @@ namespace HandlingUsersVue.Controllers
         [HttpPost]
         public IActionResult Add([FromBody, Bind("Name, Email, Skype, Signature, Avatar")] UserModel user)
         {
-            ValidateModel(user);
+            //ValidateModel(user);
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            //if (!ModelState.IsValid)
+            //    return BadRequest(ModelState);
 
             try
             {
@@ -94,10 +94,10 @@ namespace HandlingUsersVue.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody, Bind("Name, Email, Skype, Signature, Avatar, Role, Enabled")] UserModel user)
         {
-            ValidateModel(user);
+            //ValidateModel(user);
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            //if (!ModelState.IsValid)
+            //    return BadRequest(ModelState);
 
             try
             {

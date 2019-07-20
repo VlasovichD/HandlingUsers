@@ -22,6 +22,5 @@ export default class ActiveUserComponent extends Vue {
 
     updateUser(event) {
         this.$emit('updateUser');
-        console.log(event.target.files[0]);
     }
 }

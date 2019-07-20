@@ -6,3 +6,4 @@ new Vue({
     el: '#app-root',
     render: h => h(require('./components/app/app.vue.html').default)
 });
+Vue.config.devtools = true;

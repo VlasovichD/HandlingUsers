@@ -38,7 +38,10 @@ namespace HandlingUsersVue
                 options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ValidatorActionFilter));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddAutoMapper(cfg => cfg.AddProfile(new AutoMapperProfile()));
 
